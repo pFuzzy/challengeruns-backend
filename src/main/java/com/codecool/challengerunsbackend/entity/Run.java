@@ -16,6 +16,7 @@ public class Run {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private String category;
 
     @ManyToOne

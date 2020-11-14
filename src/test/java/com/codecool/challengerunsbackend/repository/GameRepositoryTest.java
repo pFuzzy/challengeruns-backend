@@ -69,7 +69,7 @@ public class GameRepositoryTest {
 
     }
     @Test(expected = DataIntegrityViolationException.class)
-    public void gameTitleCannotBeNull(){
+    public void gameTitleIsNotNull(){
         Game testGame1 = Game.builder().build();
 
         gameRepository.saveAndFlush(testGame1);
@@ -87,6 +87,13 @@ public class GameRepositoryTest {
                 .title("Title is same")
                 .build();
         gameRepository.saveAndFlush(testGame2);
+    }
+
+    @Test(expected = DataIntegrityViolationException.class)
+    public void runCategoryIsNotNull(){
+        Run testRun = Run.builder().build();
+
+        runRepository.save(testRun);
     }
 
 }
