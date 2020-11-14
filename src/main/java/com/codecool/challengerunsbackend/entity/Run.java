@@ -23,9 +23,9 @@ public class Run {
     @EqualsAndHashCode.Exclude
     private Game game;
 
-    @OneToMany(mappedBy = "run", cascade = CascadeType.PERSIST)
+
+    @OneToMany(mappedBy = "run", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @Singular
     @EqualsAndHashCode.Exclude
     private List<Split> splits;
-
 }

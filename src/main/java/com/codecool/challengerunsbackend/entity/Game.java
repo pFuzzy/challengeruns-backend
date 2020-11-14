@@ -19,7 +19,7 @@ public class Game {
     @Column(unique = true, nullable = false)
     private String title;
 
-    @OneToMany(mappedBy = "game", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "game", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @Singular
     private List<Run> runs;
 }

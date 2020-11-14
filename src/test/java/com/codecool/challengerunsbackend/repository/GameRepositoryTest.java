@@ -89,4 +89,30 @@ public class GameRepositoryTest {
         gameRepository.saveAndFlush(testGame2);
     }
 
+    @Test
+    public void removingGameRemovesRunsAndSplits(){
+        Split testSplit1 = Split.builder()
+                .name("Asylum demon")
+                .build();
+        Run testRun = Run.builder()
+                .category("Any%")
+                .split(testSplit1)
+                .build();
+        Game testGame = Game.builder()
+                .title("Dark Souls 1")
+                .run(testRun)
+                .build();
+        testSplit1.setRun(testRun);
+        testRun.setGame(testGame);
+
+        gameRepository.save(testGame);
+        gameRepository.deleteAll();
+        
+        assertThat(gameRepository.findAll())
+                .hasSize(0);
+        assertThat(runRepository.findAll())
+                .hasSize(0);
+        assertThat(splitRepository.findAll())
+                .hasSize(0);
+    }
 }
