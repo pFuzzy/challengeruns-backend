@@ -1,30 +1,27 @@
 package com.codecool.challengerunsbackend.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class Run {
+public class Split {
     @Id
     @GeneratedValue
     private Long id;
 
-    private String category;
+    private String name;
 
     @ManyToOne
-    private Game game;
-
-    @OneToMany(mappedBy = "run")
-    private List<Split> splits;
-
+    private Run run;
 }
