@@ -2,10 +2,7 @@ package com.codecool.challengerunsbackend.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +14,7 @@ public class Split {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     @ManyToOne
