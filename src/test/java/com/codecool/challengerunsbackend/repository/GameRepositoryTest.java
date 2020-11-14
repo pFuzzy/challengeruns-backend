@@ -3,6 +3,7 @@ package com.codecool.challengerunsbackend.repository;
 import com.codecool.challengerunsbackend.entity.Game;
 import com.codecool.challengerunsbackend.entity.Run;
 import com.codecool.challengerunsbackend.entity.Split;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +13,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.SPLITERATOR;
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
@@ -68,15 +72,17 @@ public class GameRepositoryTest {
                 .anyMatch(split -> split.getName().equals("Asylum demon"));
 
     }
+
     @Test(expected = DataIntegrityViolationException.class)
-    public void gameTitleIsNotNull(){
+    public void gameTitleIsNotNull() {
         Game testGame1 = Game.builder().build();
 
         gameRepository.saveAndFlush(testGame1);
 
     }
+
     @Test(expected = DataIntegrityViolationException.class)
-    public void gameTitleIsUnique(){
+    public void gameTitleIsUnique() {
         Game testGame1 = Game.builder()
                 .title("Title is same")
                 .build();
@@ -90,7 +96,7 @@ public class GameRepositoryTest {
     }
 
     @Test
-    public void removingGameRemovesRunsAndSplits(){
+    public void removingGameRemovesRunsAndSplits() {
         Split testSplit1 = Split.builder()
                 .name("Asylum demon")
                 .build();
@@ -107,12 +113,34 @@ public class GameRepositoryTest {
 
         gameRepository.save(testGame);
         gameRepository.deleteAll();
-        
+
         assertThat(gameRepository.findAll())
                 .hasSize(0);
         assertThat(runRepository.findAll())
                 .hasSize(0);
         assertThat(splitRepository.findAll())
                 .hasSize(0);
+    }
+
+    @Test
+    public void getGameByTitle() {
+        Run testRun1 = Run.builder()
+                .category("Any%")
+                .build();
+        Run testRun2 = Run.builder()
+                .category("All bosses")
+                .build();
+        Game testGame = Game.builder()
+                .title("Test title")
+                .run(testRun1)
+                .run(testRun2)
+                .build();
+
+        testRun1.setGame(testGame);
+        testRun2.setGame(testGame);
+        gameRepository.save(testGame);
+
+        assertThat(gameRepository.getGameByTitle("Test title").equals(testGame));
+        assertThat(gameRepository.getGameByTitle("Test title").getRuns().equals(Lists.newArrayList(testRun1,testRun2)));
     }
 }
