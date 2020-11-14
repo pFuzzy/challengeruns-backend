@@ -1,10 +1,7 @@
 package com.codecool.challengerunsbackend.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,9 +19,12 @@ public class Run {
     private String category;
 
     @ManyToOne
+    @EqualsAndHashCode.Exclude
     private Game game;
 
-    @OneToMany(mappedBy = "run")
+    @OneToMany(mappedBy = "run", cascade = CascadeType.PERSIST)
+    @Singular
+    @EqualsAndHashCode.Exclude
     private List<Split> splits;
 
 }

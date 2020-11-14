@@ -1,9 +1,6 @@
 package com.codecool.challengerunsbackend.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,5 +20,6 @@ public class Split {
     private String name;
 
     @ManyToOne
+    @EqualsAndHashCode.Exclude
     private Run run;
 }

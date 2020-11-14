@@ -3,10 +3,7 @@ package com.codecool.challengerunsbackend.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -21,7 +18,7 @@ public class Game {
 
     private String title;
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(mappedBy = "game", cascade = CascadeType.PERSIST)
     @Singular
     private List<Run> runs;
 }
