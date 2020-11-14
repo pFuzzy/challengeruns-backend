@@ -89,11 +89,4 @@ public class GameRepositoryTest {
         gameRepository.saveAndFlush(testGame2);
     }
 
-    @Test(expected = DataIntegrityViolationException.class)
-    public void runCategoryIsNotNull(){
-        Run testRun = Run.builder().build();
-
-        runRepository.save(testRun);
-    }
-
 }
