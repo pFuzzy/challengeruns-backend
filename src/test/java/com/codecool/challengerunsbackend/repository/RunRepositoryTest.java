@@ -1,5 +1,6 @@
 package com.codecool.challengerunsbackend.repository;
 
+import com.codecool.challengerunsbackend.entity.Game;
 import com.codecool.challengerunsbackend.entity.Run;
 import com.codecool.challengerunsbackend.entity.Split;
 import org.assertj.core.util.Lists;
@@ -20,6 +21,9 @@ public class RunRepositoryTest {
     @Autowired
     private RunRepository runRepository;
 
+    @Autowired
+    private GameRepository gameRepository;
+
     @Test(expected = DataIntegrityViolationException.class)
     public void runCategoryIsNotNull(){
         Run testRun = Run.builder().build();
@@ -28,7 +32,12 @@ public class RunRepositoryTest {
     }
 
     @Test
-    public void getRunByCategory(){
+    public void getRunByCategoryAndGameId(){
+        Game testGame = Game.builder()
+                .title("Dark souls 1")
+                .build();
+        gameRepository.save(testGame);
+
         Split testSplit1 = Split.builder()
                 .name("Asylum demon")
                 .build();
@@ -45,14 +54,17 @@ public class RunRepositoryTest {
                 .split(testSplit3)
                 .build();
 
+
         testSplit1.setRun(testRun);
         testSplit2.setRun(testRun);
         testSplit3.setRun(testRun);
+        testRun.setGame(testGame);
 
         runRepository.save(testRun);
 
-        assertThat(runRepository.getRunByCategory("Any%").equals(testRun));
-        assertThat(runRepository.getRunByCategory("Any%").getSplits().equals(Lists.newArrayList(testSplit1,testSplit2,testSplit3)));
+
+        assertThat(runRepository.getRunByCategoryAndGame_Id("Any%", testGame.getId()).equals(testRun));
+        assertThat(runRepository.getRunByCategoryAndGame_Id("Any%", testGame.getId()).getSplits().equals(Lists.newArrayList(testSplit1,testSplit2,testSplit3)));
     }
 
 }
