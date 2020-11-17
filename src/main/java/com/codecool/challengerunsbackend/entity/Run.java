@@ -1,6 +1,7 @@
 package com.codecool.challengerunsbackend.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,6 +22,8 @@ public class Run {
 
     @ManyToOne
     @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
     private Game game;
 
 
