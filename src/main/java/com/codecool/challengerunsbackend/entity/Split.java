@@ -3,6 +3,7 @@ package com.codecool.challengerunsbackend.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,4 +21,9 @@ public class Split {
     @ManyToOne
     @EqualsAndHashCode.Exclude
     private Run run;
+
+    @ElementCollection
+    @Column(nullable = true)
+    @Singular("step")
+    private List<String> stepByStep;
 }
