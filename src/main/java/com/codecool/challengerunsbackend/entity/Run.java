@@ -18,7 +18,11 @@ public class Run {
     private Long id;
 
     @Column(nullable = false)
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+    @Column(nullable = false)
+    private String name;
 
     @ManyToOne
     @EqualsAndHashCode.Exclude

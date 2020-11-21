@@ -16,6 +16,9 @@ public class Area {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
+    private String name;
+
     @ManyToOne
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
