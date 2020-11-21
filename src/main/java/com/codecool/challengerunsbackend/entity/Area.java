@@ -11,23 +11,30 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Split {
+public class Area {
     @Id
     @GeneratedValue
     private Long id;
-
-    @Column(nullable = false)
-    private String name;
 
     @ManyToOne
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore
-    private Run run;
+    private Split split;
 
-    @OneToMany(mappedBy = "split")
+    @ElementCollection
     @Singular
-    private List<Area> areas;
+    private List<String> pickUps;
 
+    @ElementCollection
+    @Singular
+    private List<String> acquiredLevels;
 
+    @ElementCollection
+    @Singular
+    private List<String> upgrades;
+
+    @ElementCollection
+    @Singular
+    private List<String> enemies;
 }
