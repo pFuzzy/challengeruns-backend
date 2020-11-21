@@ -25,9 +25,7 @@ public class Split {
     @JsonIgnore
     private Run run;
 
-    @OneToMany(mappedBy = "split")
+    @OneToMany(mappedBy = "split",cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @Singular
     private List<Area> areas;
-
-
 }

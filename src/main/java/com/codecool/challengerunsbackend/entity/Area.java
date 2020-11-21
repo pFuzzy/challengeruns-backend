@@ -40,4 +40,8 @@ public class Area {
     @ElementCollection
     @Singular
     private List<String> enemies;
+
+    @ElementCollection
+    @Singular
+    private List<String> tips;
 }

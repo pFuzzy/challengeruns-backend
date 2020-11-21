@@ -1,5 +1,6 @@
 package com.codecool.challengerunsbackend.repository;
 
+import com.codecool.challengerunsbackend.entity.Category;
 import com.codecool.challengerunsbackend.entity.Game;
 import com.codecool.challengerunsbackend.entity.Run;
 import com.codecool.challengerunsbackend.entity.Split;
@@ -48,7 +49,7 @@ public class RunRepositoryTest {
                 .name("Bell gargoyles")
                 .build();
         Run testRun = Run.builder()
-                .category("Any%")
+                .category(Category.NO_HIT)
                 .split(testSplit1)
                 .split(testSplit2)
                 .split(testSplit3)
