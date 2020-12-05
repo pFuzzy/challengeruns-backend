@@ -512,7 +512,7 @@ public class ChallengeRunsBackendApplication {
             //--------------------------------
             Run ds1Any = Run.builder()
                     .name("Any%")
-                    .category(Category.NO_HIT)
+                    .category("No-hit")
                     .split(asylum)
                     .split(quelaag)
                     .split(ceaseless)

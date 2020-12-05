@@ -18,8 +18,7 @@ public class Run {
     private Long id;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    private String category;
 
     @Column(nullable = false)
     private String name;

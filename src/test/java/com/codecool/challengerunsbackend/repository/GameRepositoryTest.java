@@ -1,6 +1,5 @@
 package com.codecool.challengerunsbackend.repository;
 
-import com.codecool.challengerunsbackend.entity.Category;
 import com.codecool.challengerunsbackend.entity.Game;
 import com.codecool.challengerunsbackend.entity.Run;
 import com.codecool.challengerunsbackend.entity.Split;
@@ -42,7 +41,7 @@ public class GameRepositoryTest {
                 .name("Bell gargoyles")
                 .build();
         Run testRun = Run.builder()
-                .category(Category.NO_HIT)
+                .category("No-hit")
                 .split(testSplit1)
                 .split(testSplit2)
                 .split(testSplit3)
@@ -63,7 +62,7 @@ public class GameRepositoryTest {
         assertThat(runRepository.findAll())
                 .hasSize(1)
                 .allMatch(run -> run.getGame() != null)
-                .anyMatch(run -> run.getCategory().equals(Category.NO_HIT));
+                .anyMatch(run -> run.getCategory().equals("No-hit"));
         assertThat(splitRepository.findAll())
                 .hasSize(3)
                 .allMatch(split -> split.getRun() != null)
@@ -99,7 +98,7 @@ public class GameRepositoryTest {
                 .name("Asylum demon")
                 .build();
         Run testRun = Run.builder()
-                .category(Category.NO_HIT)
+                .category("No-hit")
                 .split(testSplit1)
                 .build();
         Game testGame = Game.builder()
@@ -123,10 +122,10 @@ public class GameRepositoryTest {
     @Test
     public void getGameByTitle() {
         Run testRun1 = Run.builder()
-                .category(Category.NO_HIT)
+                .category("No-hit")
                 .build();
         Run testRun2 = Run.builder()
-                .category(Category.NO_HIT)
+                .category("No-hit")
                 .build();
         Game testGame = Game.builder()
                 .title("Test title")
