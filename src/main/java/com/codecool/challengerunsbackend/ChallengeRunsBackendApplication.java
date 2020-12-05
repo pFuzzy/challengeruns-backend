@@ -527,9 +527,16 @@ public class ChallengeRunsBackendApplication {
                     .split(fourKings)
                     .split(gwyn)
                     .build();
+
+            Run testNoDamage = Run.builder()
+                    .name("test no damage")
+                    .category("No-damage")
+                    .build();
+
             Game ds1 = Game.builder()
                     .title("Dark souls 1")
                     .run(ds1Any)
+                    .run(testNoDamage)
                     .build();
 
             asylum.setRun(ds1Any);
@@ -546,6 +553,7 @@ public class ChallengeRunsBackendApplication {
             fourKings.setRun(ds1Any);
             gwyn.setRun(ds1Any);
 
+            testNoDamage.setGame(ds1);
             ds1Any.setGame(ds1);
 
             gameRepository.save(ds1);
