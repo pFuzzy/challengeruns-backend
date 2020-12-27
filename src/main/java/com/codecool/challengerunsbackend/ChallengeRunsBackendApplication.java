@@ -9,6 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootApplication
 public class ChallengeRunsBackendApplication {
 
@@ -527,9 +530,27 @@ public class ChallengeRunsBackendApplication {
                     .split(fourKings)
                     .split(gwyn)
                     .build();
+            Run allBosses = Run.builder()
+                    .name("All bosses")
+                    .category("No-hit")
+                    .build();
+
+            Run anyPercentNoDmg = Run.builder()
+                    .name("Any%")
+                    .category("No-damage")
+                    .build();
+
+            Run allBossesNoDmg = Run.builder()
+                    .name("All bosses")
+                    .category("No-damage")
+                    .build();
+
             Game ds1 = Game.builder()
                     .title("Dark souls 1")
                     .run(ds1Any)
+                    .run(anyPercentNoDmg)
+                    .run(allBosses)
+                    .run(allBossesNoDmg)
                     .build();
 
             asylum.setRun(ds1Any);
@@ -546,9 +567,36 @@ public class ChallengeRunsBackendApplication {
             fourKings.setRun(ds1Any);
             gwyn.setRun(ds1Any);
 
+
+            allBosses.setGame(ds1);
+            allBossesNoDmg.setGame(ds1);
+            anyPercentNoDmg.setGame(ds1);
             ds1Any.setGame(ds1);
 
             gameRepository.save(ds1);
+
+            Game ds2 = Game.builder()
+                    .title("Dark souls 2")
+                    .build();
+
+            Game ds3 = Game.builder()
+                    .title("Dark souls 3")
+                    .build();
+
+            Game sekiro = Game.builder()
+                    .title("Sekiro")
+                    .build();
+            Game jedi = Game.builder()
+                    .title("Jedi fallen order")
+                    .build();
+
+            List<Game> games = new ArrayList<>();
+            games.add(ds2);
+            games.add(ds3);
+            games.add(sekiro);
+            games.add(jedi);
+
+            gameRepository.saveAll(games);
 
 
         };
