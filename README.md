@@ -1,4 +1,4 @@
-# challengeruns-backend
+# Challengeruns-backend
 This project is a community page for people interested in completing challenge runs.
 This repository contains the backend of the project.
 # What are challenge runs?
